@@ -6,7 +6,7 @@ const config = require('./db/config')
 const app = express();
 app.use(express.json())
 app.use(cors());
-
+const port = process.env.PORT || 3000;
 // Set up Multer for file uploads
 const storage = multer.memoryStorage(); // Store the image data in memory
 const upload = multer({ storage: storage });
@@ -32,4 +32,6 @@ app.post('/upload', upload.single('image'), async (req, res) => {
     }
 });
 
-app.listen(4000)
+app.listen(port, "0.0.0.0", () => {
+  console.log(`Server listening at http://0.0.0.0:${port}`);
+});
